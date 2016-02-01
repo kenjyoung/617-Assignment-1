@@ -3,8 +3,10 @@ function [ vectors ] = TangentVectors( images )
 %   Detailed explanation goes here
 
 num_images = size(images,3);
+
+H = fspecial('gaussian',5,0.3);
 for i=1:num_images
-    image = images(:,:,i);
+    image = imfilter(images(:,:,i), H);
     c = size(image)/2;
 
     [X,Y] = meshgrid(-c(1):size(image,1)-c(1)-1,-c(2):size(image,2)-c(2)-1);
@@ -18,7 +20,8 @@ for i=1:num_images
 
     dshear = dx.*Y;
 
-    vectors(:,:,i) = [dx(:),dy(:),drot(:),dscale(:),daspect(:),dshear(:)];
+    vectors(:,:,i) = normc([dx(:),dy(:),drot(:),dscale(:),daspect(:),dshear(:)]);
+    %vectors(:,:,i) = [dx,dy,drot,dscale,daspect,dshear];
 end
 end
 
