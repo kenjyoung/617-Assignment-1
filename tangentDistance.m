@@ -4,9 +4,6 @@ assert(isequal(size(image1),size(image2)), 'image sizes must be equal to compute
 I1 = image1(:);
 I2 = image2(:);
 
-size([M1'*M1,-M1'*M2; M2'*M1,-M2'*M2])
-size([M1'*(I2-I1); M2'*(I2-I1)])
-
 u = [M1'*M1,-M1'*M2; M2'*M1,-M2'*M2]\[M1'*(I2-I1); M2'*(I2-I1)];
 u1 = u(1:size(u)/2);
 u2 = u(size(u)/2+1:end);
