@@ -19,8 +19,10 @@ for i=1:num_images
     daspect = dx.*X-dy.*Y;
 
     dshear = dx.*Y;
+    
+    dthickness = dx*dx+dy*dy;
 
-    vectors(:,:,i) = normc([dx(:),dy(:),drot(:),dscale(:),daspect(:),dshear(:)]);
+    vectors(:,:,i) = normc([dx(:),dy(:),drot(:),dscale(:),daspect(:),dshear(:), dthickness(:)]);
     %vectors(:,:,i) = [dx,dy,drot,dscale,daspect,dshear];
 end
 end
