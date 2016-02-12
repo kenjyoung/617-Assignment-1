@@ -23,7 +23,7 @@ for i=1:num_images
     dthickness = dx*dx+dy*dy;
 
     vectors(:,:,i) = normc([dx(:),dy(:),drot(:),dscale(:),daspect(:),dshear(:), dthickness(:)]);
-    %vectors(:,:,i) = [dx,dy,drot,dscale,daspect,dshear];
+    %vectors(:,:,i) = [dx,dy,drot,dscale,daspect,dshear,dthickness];
 end
 end
 
