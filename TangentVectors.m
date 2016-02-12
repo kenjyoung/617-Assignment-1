@@ -4,7 +4,7 @@ function [ vectors ] = TangentVectors( images )
 
 num_images = size(images,3);
 
-H = fspecial('gaussian',5,0.3);
+H = fspecial('gaussian',5,0.4);
 for i=1:num_images
     image = imfilter(images(:,:,i), H);
     c = size(image)/2;

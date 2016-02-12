@@ -10,6 +10,6 @@ for i=1:size(data,1)
     M2 = reshape(data(i,image_size(1)*image_size(2)+1:end),[],num_tangent_vectors);
     tangentDist(i) = tangentDistance( image1 , M1, image2, M2);
 end
-tangentDist = tangentDist'
+tangentDist = tangentDist';
 end
 
