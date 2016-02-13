@@ -2,6 +2,7 @@ clear
 %load mnist data
 display 'loading data...'
 images = loadMNISTImages('data/train-images-idx3-ubyte');
+images = images(:,:,1:1000);
 labels = loadMNISTLabels('data/train-labels-idx1-ubyte');
 num_images = size(images,3);
 fold_size = ceil(num_images/10);
