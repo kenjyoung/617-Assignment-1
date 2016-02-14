@@ -7,13 +7,14 @@ labels = single(loadMNISTLabels('data/t10k-labels-idx1-ubyte'));
 num_images = size(images,3);
 
 for i=1:num_images
-	hog = vl_hog(images(:,:,i), cellSize);
+	hog = vl_hog(images(:,:,i), cellSize, 'variant', 'dalaltriggs');
     hogs(:,i) = hog(:);
 end
-
-x = cos(feature_weights*hogs+repmat(feature_biases,1,num_images));
+x = sqrt(2/numfeatures)*cos(feature_weights*hogs+repmat(feature_biases,1,num_images));
 
 scores = w * x + repmat(b,1,num_images);
 
 [~,class] = max(scores,[],1);
-accuracy = nnz(class'==labels)/num_images
+class = class'-1;
+accuracy = nnz(class==labels)/num_images;
+fprintf('Test set accuracy: %f\n',accuracy);

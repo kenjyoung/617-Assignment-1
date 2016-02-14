@@ -17,7 +17,7 @@ images = reshape(images, size(images, 1) * size(images, 2), size(images, 3));
 trainImageTangentVectors=[images(:,:);tangentVectors(:,:)];
 
 display 'preform cross validation'
-k_max=50;
+k_max=300;
 val_curve = zeros(k_max,1);
 for i=1:10
    validation_set = (i-1)*fold_size+1:min(i*fold_size+1,num_images);
