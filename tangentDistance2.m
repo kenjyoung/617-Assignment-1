@@ -3,7 +3,7 @@ function [ tangentDist ] = tangentDistance2( v1, data )
 %   Detailed explanation goes here
 image_size = [28,28];
 num_tangent_vectors = 7;
-k_filter = 100;
+k_filter = 500;
 image1 = v1(1:image_size(1)*image_size(2));
 M1 = reshape(v1(image_size(1)*image_size(2)+1:end),[],num_tangent_vectors);
 if(size(data,1)>k_filter) 
