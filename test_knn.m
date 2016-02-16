@@ -2,19 +2,24 @@ clear
 display 'loading trained model'
 load('train_knn_results')
 display 'loading test data'
-images = loadMNISTImages('data/t10k-images-idx3-ubyte');
+testImages = loadMNISTImages('data/t10k-images-idx3-ubyte');
+trainImages = loadMNISTImages('data/train-images-idx3-ubyte');
 testLabels = loadMNISTLabels('data/t10k-labels-idx1-ubyte');
 trainLabels = loadMNISTLabels('data/train-labels-idx1-ubyte');
-num_test_images = size(images,3);
+num_test_images = size(testImages,3);
 
 display 'computing tangent vectors'
-tangentVectors = TangentVectors(images);
+trainImageTangentVectors = TangentVectors(trainImages);
+trainImageTangentVectors = reshape(trainImageTangentVectors, ...
+    size(trainImageTangentVectors,1)*size(tangentVectors,2),...
+    size(trainImageTangentVectors,3)); 
+tangentVectors = TangentVectors(testImages);
 tangentVectors = reshape(tangentVectors, size(tangentVectors,1)*size(tangentVectors,2),...
     size(tangentVectors,3)); 
 
-images = reshape(images, size(images, 1) * size(images, 2), size(images, 3));
+testImages = reshape(testImages, size(testImages, 1) * size(testImages, 2), size(testImages, 3));
 
-testImageTangentVectors=[images(:,:);tangentVectors(:,:)];
+testImageTangentVectors=[testImages(:,:);tangentVectors(:,:)];
 [IDX, D] = knnsearch(trainImageTangentVectors(:,:)',testImageTangentVectors(:,:)', 'K', k_best,...
         'Distance', @tangentDistance2);
 y = mode(trainLabels(IDX),2);
