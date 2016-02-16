@@ -20,6 +20,7 @@ tangentVectors = reshape(tangentVectors, size(tangentVectors,1)*size(tangentVect
 testImages = reshape(testImages, size(testImages, 1) * size(testImages, 2), size(testImages, 3));
 
 testImageTangentVectors=[testImages(:,:);tangentVectors(:,:)];
+display 'preforming knn search'
 [IDX, D] = knnsearch(trainImageTangentVectors(:,:)',testImageTangentVectors(:,:)', 'K', k_best,...
         'Distance', @tangentDistance2);
 y = mode(trainLabels(IDX),2);
